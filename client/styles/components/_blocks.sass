@@ -1,0 +1,9 @@
+.block
+  position: relative
+  +clearfix
+
+  &-content
+    @extend .container
+    &:before,
+    &:after
+      display: none

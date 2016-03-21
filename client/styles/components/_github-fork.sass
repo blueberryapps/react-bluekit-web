@@ -1,0 +1,55 @@
+// fork me on github
+.github-fork
+  width: 12.1em
+  height: 12.1em
+  position: fixed
+  overflow: hidden
+  top: 0
+  left: 0
+  z-index: 9999
+  pointer-events: none
+  font-size: 13px
+  text-decoration: none
+  text-indent: -999999px
+  +render-to(xs)
+    position: absolute
+    font-size: 11px
+
+
+  &.fixed
+    position: fixed
+
+  &:before,
+  &:after
+    box-sizing: content-box
+    width: 15.38em
+    height: 1.54em
+    display: block
+    position: absolute
+    top: 3.23em
+    left: -3.23em
+    transform: rotate(-45deg)
+
+  &:before
+    content: ""
+    padding: .38em 0
+    background-color: #000
+    background-image: linear-gradient(to bottom, #121621, #121620)
+    box-shadow: 0 0.15em 0.23em 0 rgba(0, 0, 0, 0.5)
+    pointer-events: auto
+
+  &:after
+    content: attr(title)
+    color: #fff
+    font: 700 1em "Helvetica Neue", Helvetica, Arial, sans-serif
+    line-height: 1.50em
+    text-decoration: none
+    text-shadow: 0 -0.08em rgba(0, 0, 0, 0.5)
+    text-align: center
+    text-indent: 0
+    padding: .15em 0
+    margin: .15em 0
+    border-width: .08em 0
+    border-style: dotted
+    border-color: #fff
+    border-color: rgba(255, 255, 255, 0.7)

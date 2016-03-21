@@ -1,0 +1,36 @@
+// css feeder
+=all-abs($dist: 0)
+  position: absolute
+  top: $dist
+  right: $dist
+  bottom: $dist
+  left: $dist
+
+=all-fix
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+
+=centered
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate3d(-50%,-50%,0)
+
+=display-flex
+  display: flex
+  align-items: flex-start
+  flex-wrap: wrap
+  &:before,
+  &:after
+    display: none
+
+=antialiasing($type:antialiased)
+  -webkit-font-smoothing: $type
+  font-smoothing: $type
+  font-smooth: always
+
+=box-shadow-default
+  box-shadow: 0px 0px 27px 0px rgba(0, 0, 0, 0.2)
