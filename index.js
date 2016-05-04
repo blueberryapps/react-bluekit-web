@@ -30,7 +30,7 @@ if (env.production) {
   });
 }
 
-app.get('/*', function(req, res) {
+app.get('*', function(req, res) {
   res.render('index', {
     env: env
   });
@@ -38,7 +38,7 @@ app.get('/*', function(req, res) {
 
 var port = Number(process.env.PORT || 3001);
 app.listen(port, function () {
-  console.log('server running at localhost:3001, go refresh and see magic');
+  console.log(`server running at localhost:${process.env.PORT}, go refresh and see magic`);
 });
 
 if (env.production === false) {
