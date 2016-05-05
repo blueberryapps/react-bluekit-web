@@ -1,13 +1,40 @@
 // footer
 .footer
+  margin-top: rem(100)
+  font-size: rem(20)
   text-align: center
-  background: #0064d4
   color: white
 
   .block-content
-    margin-top: rem(66)
-    margin-bottom: rem(54)
+    margin: 0 auto
+    padding-top: rem(66)
+    padding-bottom: rem(154)
+    min-height: calc(100vh - 5.55rem)
+    display: flex
+    align-items: center
+    justify-content: center
 
-  strong
-    font-size: rem(30)
-    display: block
+  p
+    margin: rem(60) 0
+
+  .made
+    img
+      width: rem(16)
+      backface-visibility: hidden
+
+    span:hover
+      img
+        animation: pulse 2.5s ease-out infinite
+
+  .more
+    a
+      text-decoration: underline
+      color: white
+      &:hover
+        color: $brand-primary
+
+  .logo
+    img
+      width: rem(269)
+      +render-to(xs)
+        width: rem(200)

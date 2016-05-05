@@ -1,8 +1,17 @@
 // code box
 .code
   margin: rem(45) 0
-  font-size: 15px
+  font-size: rem(15)
   +box-shadow-default
+  color: black
+  background: white
 
   pre
+    margin: 0
     padding: rem(41)
+    +render-to(xs)
+      padding: rem(30) rem(20)
+      font-size: rem(14)
+
+.tabs + .code
+  margin-top: 0

@@ -1,0 +1,31 @@
+// tabs
+.tabs
+  margin: 0
+  padding: 0
+  list-style: none
+  +clearfix
+
+  li
+    padding: 0 0 rem(5)
+    display: block
+    position: relative
+    float: left
+    & + li
+      margin-left: rem(5)
+
+  a
+    padding: rem(8) rem(22)
+    font-size: rem(16)
+    display: block
+    background: rgba(255,255,255, 0.8)
+    color: darken($gray-base, 10%)
+    &:hover
+      text-decoration: none
+      background: rgba(255,255,255, 1)
+      color: darken(#0ea2e3, 22%)
+
+  li.active
+    background: white
+    a
+      color: darken(#0ea2e3, 22%)
+

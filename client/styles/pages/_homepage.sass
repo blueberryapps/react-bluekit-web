@@ -1,10 +1,8 @@
 .block-hp-top
-  background: #99e9f7
-  overflow: hidden
 
   .block-content
     margin-top: rem(67)
-    margin-bottom: rem(125)
+    margin-bottom: 0
     text-align: center
 
   .logo
@@ -12,6 +10,8 @@
     width: 100%
     max-width: rem(256)
     display: inline-block
+    +render-to(xs)
+      max-width: rem(200)
     img
       display: block
       width: 100%
@@ -20,15 +20,49 @@
     margin: 0 0 rem(30)
     font-size: rem(20)
 
+  .sample
+    margin: rem(75) 0 0
+    color: black
+    +box-shadow-default
+    position: relative
+    +render-to(xs)
+      margin-top: rem(95)
+
+    & > img
+      width: 100%
+      display: block
+
+    &:before
+      content: ""
+      margin: 0 rem(34) 0 0
+      width: rem(182)
+      height: rem(117)
+      display: block
+      position: absolute
+      top: rem(-13)
+      right: 100%
+      background: url("/client/images/try-it-now.svg") no-repeat center top
+      background-size: 100% auto
+      +render-to(1600px)
+        margin-right: rem(25)
+        width: rem(150)
+      +render-to(1500px)
+        margin-right: rem(13)
+        width: rem(100)
+      +render-to(1362px)
+        background-image: url("/client/images/try-it-now@xs.svg")
+        top: auto
+        bottom: 100%
+        right: auto
+        left: -40px
+        margin: 0 0 rem(15) 0
+        background-position: center bottom
+      +render-to(800px)
+        left: 0
+      +render-to(xs)
+        width: rem(65)
+
 .block-hp-sample
 
   .block-content
-    margin-bottom: rem(100)
-
-  .sample
-    margin: rem(-42) 0 0
-    +box-shadow-default
-
-    img
-      width: 100%
-      display: block
+    margin-bottom: 0

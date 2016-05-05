@@ -1,0 +1,39 @@
+// one page nav
+.one-page-nav
+  position: fixed
+  top: rem(154)
+  right: rem(76)
+  z-index: 100
+  +render-to(1560px)
+    display: none
+
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+  li
+    padding: 0 rem(26) 0 0
+    position: relative
+    & + li
+      margin-top: rem(10)
+  a
+    font-weight: 300
+    text-decoration: none
+    color: inherit
+    &:hover
+      text-decoration: underline
+
+  .hexagon
+    width: 18px
+    height: 19px
+    position: absolute
+    top: 50%
+    right: 0
+    transform: translate(0, -50%)
+    background: url("/client/images/hexagon.png") no-repeat center top
+
+  .active .hexagon
+    background-position: center bottom
+
+
+

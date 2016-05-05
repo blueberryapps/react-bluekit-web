@@ -1,6 +1,14 @@
 html
   font-size: $font-size-base
+  +render-to(sm)
+    font-size: $font-size-base - 1
 
 body
   font-size: inherit
   +antialiasing
+  color: white
+  +gradient-directional($start-color: #0ea2e3, $end-color: #2ec8ef, $deg: 27deg)
+  background-attachment: fixed
+
+  +render-to(xs)
+    +gradient-directional($start-color: #0ea2e3, $end-color: #2ec8ef, $deg: 55deg)
