@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import BlueKit from 'react-bluekit';
 import componentsIndex from '../../componentsIndex';
 import {Scrollspy} from 'react-scrollspy';
 import {StyleRoot} from 'radium';
 
 class IndexComponent extends Component {
+  state = {
+    codeStyle: 'babel'
+  }
+
+  changeStyle(event, codeStyle) {
+    this.setState({codeStyle})
+    event.preventDefault()
+  }
+
   render() {
+    const {codeStyle} = this.state
     return (
       <StyleRoot>
         <section>
@@ -26,7 +37,7 @@ class IndexComponent extends Component {
             <div className="block-content">
               <h1 className="logo"><img src="client/images/logo.svg" alt="Bluekit" /></h1>
               <p>Render React components with editable source and live preview</p>
-              <p><span className="label label-primary">npm install component-playground</span></p>
+              <p><span className="label label-primary">npm install react-bluekit --save</span></p>
 
               <div id="sample" className="sample">
                 <BlueKit
@@ -40,36 +51,27 @@ class IndexComponent extends Component {
           <div className="block block-hp-sample" id="setup">
           <div className="block-content">
 
-            <h2 className="h3" id="setup-content">Set up</h2>
-            <p>In your html document, add the required CodeMirror scripts at the bottom, before your bundle script:</p>
+            <h2 className="h3" id="setup-content">Analyze your components</h2>
+            <p>Add into your gulp file</p>
 
             <ul className="tabs">
-              <li className="active"><a href="#tab-1">Style 1</a></li>
-              <li><a href="#tab-1">Style 2</a></li>
-              <li><a href="#tab-1">Style 3</a></li>
+              <li className={codeStyle === 'babel' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'babel')}>Babel</a></li>
+              <li className={codeStyle === 'es5' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'es5')}>ES5</a></li>
             </ul>
 
             <div className="code">
               <pre>
-              &lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/codemirror.min.js&quot;&gt;&lt;/script&gt;
-              &lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/mode/javascript/javascript.min.js&quot;&gt;&lt;/script&gt;
+                {this.renderCodeCreate()}
               </pre>
             </div>
 
-            <p>In your JSX, require the component as use it like this:</p>
+            <p>Then run <code>gulp build-bluekit</code> to generate informations about your components</p>
 
-            <div className="code">
-              <pre>
-              import Button from &rsquo;../components/Button.react.js
-              &lt;Button
-              kind=&rsquo;primary&rsquo;
-              children=&rsquo;Default ANY&rsquo;
-              &gt;
-              Default ANY
-              &lt;/Button&gt;
-              </pre>
-            </div>
-
+          <div className="code">
+            <pre>
+              {this.renderCodeInsert()}
+            </pre>
+          </div>
           </div>
           </div>
         </section>
@@ -86,6 +88,47 @@ class IndexComponent extends Component {
 
       </StyleRoot>
     );
+  }
+
+  renderCodeInsert() {
+    const {codeStyle} = this.state
+    return codeStyle === 'babel'
+      ? <code dangerouslySetInnerHTML={{__html:`import Bluekit from 'react-bluekit';
+import componentsIndex from './componentsIndex';
+
+&lt;BlueKit
+  componentsIndex={componentsIndex}
+  inline // display inline (not full page)
+/&gt;`}} />
+      : <code dangerouslySetInnerHTML={{__html:`var Bluekit = require('react-bluekit').default;
+var componentsIndex = require('./componentsIndex').default;
+
+&lt;BlueKit
+  componentsIndex={componentsIndex}
+  inline // display inline (not full page)
+/&gt;`}} />
+
+  }
+
+  renderCodeCreate() {
+    const {codeStyle} = this.state
+    return codeStyle === 'babel'
+      ? <code dangerouslySetInnerHTML={{__html:`import createBlueKit from 'react-bluekit/lib/createBlueKit';
+
+createBlueKit(&lcub;
+  // your directory where components are located
+  baseDir: &grave;&dollar;{__dirname}/src/browser&grave;,
+  // relative paths from base dir where to look for components
+  paths: ['./components', './auth']
+&rcub;);`}} />
+      : <code dangerouslySetInnerHTML={{__html:`var createBlueKit = require('react-bluekit/lib/createBlueKit').default;
+
+createBlueKit(&lcub;
+  // your directory where components are located
+  baseDir: &grave;&dollar;{__dirname}/src/browser&grave;,
+  // relative paths from base dir where to look for components
+  paths: ['./components', './auth']
+&rcub;);`}} />
   }
 }
 
