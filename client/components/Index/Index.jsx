@@ -89,7 +89,7 @@ class IndexComponent extends Component {
             <div className="footer-holder">
               <p className="made"><span>Made with <img src="client/images/heart.svg" alt="love" /> by</span></p>
               <p className="logo"><a href="http://www.blueberry.cz" target="_blank"><img src="client/images/logo-blueberry.svg" alt="Blueberry" /></a></p>
-              <p className="more"><a href="#">&hellip;learn more about our projects</a></p>
+              <p className="more"><a href="http://www.blueberry.cz">&hellip;learn more about our projects</a></p>
             </div>
           </div>
         </footer>
