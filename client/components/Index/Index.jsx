@@ -1,3 +1,4 @@
+import AceEditor from 'react-ace';
 import CopyCode from './CopyCode';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
@@ -107,15 +108,45 @@ class IndexComponent extends Component {
 
     return codeStyle === 'babel'
       ? <div>
-          <code>
-            {babelSource}
-          </code>
+          <AceEditor
+            editorProps={{$blockScrolling: true}}
+            fontSize={13}
+            highlightActiveLine={false}
+            maxLines={`${babelSource}`.split(/\n/).length}
+            mode="jsx"
+            name="babelSourceInsert"
+            readOnly
+            setOptions={{
+              enableBasicAutocompletion: false,
+              enableLiveAutocompletion: false,
+            }}
+            showGutter={false}
+            showPrintMargin={false}
+            theme="chrome"
+            value={babelSource}
+            width="100%"
+          />
           {this.renderCopyCode(babelSource)}
         </div>
       : <div>
-          <code>
-            {esSource}
-          </code>
+          <AceEditor
+            editorProps={{$blockScrolling: true}}
+            fontSize={13}
+            highlightActiveLine={false}
+            maxLines={`${esSource}`.split(/\n/).length}
+            mode="jsx"
+            name="esSourceInsert"
+            readOnly
+            setOptions={{
+              enableBasicAutocompletion: false,
+              enableLiveAutocompletion: false,
+            }}
+            showGutter={false}
+            showPrintMargin={false}
+            theme="chrome"
+            value={esSource}
+            width="100%"
+          />
           {this.renderCopyCode(esSource)}
         </div>
 
@@ -129,10 +160,45 @@ class IndexComponent extends Component {
 
     return codeStyle === 'babel'
       ? <div>
-          <code dangerouslySetInnerHTML={{__html: babelSource}} />
+          <AceEditor
+            editorProps={{$blockScrolling: true}}
+            fontSize={13}
+            highlightActiveLine={false}
+            maxLines={`${babelSource}`.split(/\n/).length}
+            mode="jsx"
+            name="babelSourceCreate"
+            readOnly
+            setOptions={{
+              enableBasicAutocompletion: false,
+              enableLiveAutocompletion: false,
+            }}
+            showGutter={false}
+            showPrintMargin={false}
+            theme="chrome"
+            value={babelSource}
+            width="100%"
+          />
           {this.renderCopyCode(babelSource)}
         </div>
       : <div>
+          <AceEditor
+            editorProps={{$blockScrolling: true}}
+            fontSize={13}
+            highlightActiveLine={false}
+            maxLines={`${esSource}`.split(/\n/).length}
+            mode="jsx"
+            name="esSourceCreate"
+            readOnly
+            setOptions={{
+              enableBasicAutocompletion: false,
+              enableLiveAutocompletion: false,
+            }}
+            showGutter={false}
+            showPrintMargin={false}
+            theme="chrome"
+            value={esSource}
+            width="100%"
+          />
           <code dangerouslySetInnerHTML={{__html: esSource}} />
           {this.renderCopyCode(esSource)}
         </div>
