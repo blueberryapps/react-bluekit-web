@@ -1,0 +1,43 @@
+.copy-wrapper
+  background-color: white
+  position: absolute
+  top: 0
+  right: 0
+  padding: 10px
+  .copy-icon
+    background: url('/client/images/copy.svg') no-repeat center
+    width: 20px
+    height: 26px
+    position: relative
+    &:hover
+      cursor: pointer
+    &.copied
+      .tooltip
+        display: block
+
+.tooltip
+  background-color: rgba(0, 0, 0, .7)
+  font-family: 'Arial', sans-serif
+  font-size: 12px
+  padding: 4px
+  color: white
+  position: absolute
+  left: calc(50% - 2px)
+  bottom: calc(100% + 5px)
+  transform: translateX(-50%)
+  display: none
+  &:before
+    content: ''
+    position: absolute
+    top: 100%
+    left: 50%
+    border-style: solid
+    height: 0
+    width: 0
+    pointer-events: none
+    border-color: rgba(136, 183, 213, 0)
+    border-top-color: rgba(0, 0, 0, .7)
+    border-width: 4px
+    transition: all .1s ease
+    transform: translateX(-50%)
+    z-index: 3

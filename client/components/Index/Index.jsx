@@ -1,3 +1,4 @@
+import CopyCode from './CopyCode';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import BlueKit from 'react-bluekit';
@@ -7,6 +8,7 @@ import {StyleRoot} from 'radium';
 
 class IndexComponent extends Component {
   state = {
+    copied: false,
     codeStyle: 'babel'
   }
 
@@ -100,52 +102,64 @@ class IndexComponent extends Component {
 
   renderCodeInsert() {
     const {codeStyle} = this.state
+    const babelSource = `import Bluekit from 'react-bluekit';\nimport componentsIndex from './componentsIndex';\n\n<BlueKit\n componentsIndex={componentsIndex}\n inline // display inline (not full page)\n/>`
+    const esSource = `var Bluekit = require('react-bluekit').default;\nvar componentsIndex = require('./componentsIndex').default;\n\n<BlueKit\n componentsIndex={componentsIndex}\n inline // display inline (not full page)\n/>`
+
     return codeStyle === 'babel'
-      ? <code dangerouslySetInnerHTML={{__html:`import Bluekit from 'react-bluekit';
-import componentsIndex from './componentsIndex';
-
-&lt;BlueKit
-  componentsIndex={componentsIndex}
-  inline // display inline (not full page)
-/&gt;`}} />
-      : <code dangerouslySetInnerHTML={{__html:`var Bluekit = require('react-bluekit').default;
-var componentsIndex = require('./componentsIndex').default;
-
-&lt;BlueKit
-  componentsIndex={componentsIndex}
-  inline // display inline (not full page)
-/&gt;`}} />
+      ? <div>
+          <code>
+            {babelSource}
+          </code>
+          {this.renderCopyCode(babelSource)}
+        </div>
+      : <div>
+          <code>
+            {esSource}
+          </code>
+          {this.renderCopyCode(esSource)}
+        </div>
 
   }
 
   renderCodeCreate() {
     const {codeStyle} = this.state
+    const babelSource = `import createBlueKit from 'react-bluekit/lib/createBlueKit';\n\ncreateBlueKit({\n // your directory where components are located\n baseDir: \`\${__dirname}/src/browser\`\,\n // relative paths from base dir where to look for components\n paths: ['./components', './auth']\n});`
+
+    const esSource = `var createBlueKit = require('react-bluekit/lib/createBlueKit').default;\n\ncreateBlueKit({\n // your directory where components are located\n baseDir: __dirname + '/src/browser'\,\n // relative paths from base dir where to look for components\n paths: ['./components', './auth']\n});`
+
     return codeStyle === 'babel'
-      ? <code dangerouslySetInnerHTML={{__html:`import createBlueKit from 'react-bluekit/lib/createBlueKit';
-
-createBlueKit(&lcub;
-  // your directory where components are located
-  baseDir: &grave;&dollar;{__dirname}/src/browser&grave;,
-  // relative paths from base dir where to look for components
-  paths: ['./components', './auth']
-&rcub;);`}} />
-      : <code dangerouslySetInnerHTML={{__html:`var createBlueKit = require('react-bluekit/lib/createBlueKit').default;
-
-createBlueKit(&lcub;
-  // your directory where components are located
-  baseDir: __dirname + '/src/browser',
-  // relative paths from base dir where to look for components
-  paths: ['./components', './auth']
-&rcub;);`}} />
+      ? <div>
+          <code dangerouslySetInnerHTML={{__html: babelSource}} />
+          {this.renderCopyCode(babelSource)}
+        </div>
+      : <div>
+          <code dangerouslySetInnerHTML={{__html: esSource}} />
+          {this.renderCopyCode(esSource)}
+        </div>
   }
 
   renderCodeWatch() {
     const {codeStyle} = this.state
-    return codeStyle === 'babel'
-      ? <code dangerouslySetInnerHTML={{__html:`gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`}} />
-      : <code dangerouslySetInnerHTML={{__html:`gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`}} />
+    const code = `gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`
 
+    return (
+      <div>
+        <code dangerouslySetInnerHTML={{__html: babelSource}} />
+        {this.renderCopyCode(babelSource)}
+      </div>
+    )
   }
+
+  renderCopyCode(source) {
+
+    return <CopyCode source={source} />
+  }
+
+  onCopy() {
+    this.setState({copied: true})
+    setTimeout(() => this.setState({copied: false}), 3000)
+  }
+
 }
 
 IndexComponent.defaultProps = {
