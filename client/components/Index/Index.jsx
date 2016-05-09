@@ -133,7 +133,7 @@ createBlueKit(&lcub;
 
 createBlueKit(&lcub;
   // your directory where components are located
-  baseDir: &grave;&dollar;{__dirname}/src/browser&grave;,
+  baseDir: __dirname + '/src/browser',
   // relative paths from base dir where to look for components
   paths: ['./components', './auth']
 &rcub;);`}} />
