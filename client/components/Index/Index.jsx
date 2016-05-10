@@ -1,9 +1,9 @@
 import AceEditor from './AceEditor';
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import BlueKit from 'react-bluekit';
 import componentsIndex from '../../componentsIndex';
-import {Scrollspy} from 'react-scrollspy';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import {Link, Element} from 'react-scroll';
 import {StyleRoot} from 'radium';
 
 class IndexComponent extends Component {
@@ -30,11 +30,23 @@ class IndexComponent extends Component {
             </a>
 
             <div className="one-page-nav">
-              <Scrollspy items={ ['sample', 'setup', 'credits'] } currentClassName="active">
-                <li><a href="#sample">Preview</a><div className="hexagon"><span></span></div></li>
-                <li><a href="#setup-content">Set up</a><div className="hexagon"><span></span></div></li>
-                <li><a href="#credits">Credits</a><div className="hexagon"><span></span></div></li>
-              </Scrollspy>
+              <ul>
+                <li>
+                  <Link activeClass="active" to="sample" spy={true} smooth={true} offset={-50} duration={400}>
+                    Preview<div className="hexagon"><span></span></div>
+                  </Link>
+                </li>
+                <li>
+                  <Link activeClass="active" to="setup-content" spy={true} smooth={true} offset={20} duration={400}>
+                    Set up<div className="hexagon"><span></span></div>
+                  </Link>
+                </li>
+                <li>
+                  <Link activeClass="active" to="credits" spy={true} smooth={true} duration={400}>
+                    Credits<div className="hexagon"><span></span></div>
+                  </Link>
+                </li>
+              </ul>
             </div>
 
             <div className="block-content">
@@ -42,60 +54,66 @@ class IndexComponent extends Component {
               <p>Render React components with editable source and live preview</p>
               <p><span className="label label-primary">npm install react-bluekit --save</span></p>
 
-              <div id="sample" className="sample">
-                {!smallDevice
-                  ? <BlueKit componentsIndex={componentsIndex} inline />
-                  : <img src="client/images/sample.jpg" alt="BlueKit sample" />
-                }
+              <Element name="sample">
+                <div className="sample">
+                  {!smallDevice
+                    ? <BlueKit componentsIndex={componentsIndex} inline />
+                    : <img src="client/images/sample.jpg" alt="BlueKit sample" />
+                  }
+                </div>
+              </Element>
+            </div>
+          </div>
+
+          <Element name="setup-content">
+            <div className="block block-hp-sample">
+              <div className="block-content">
+
+                <h2 className="h3">Analyze your components</h2>
+                <p>Add the following lines to your gulp file:</p>
+
+                <ul className="tabs">
+                  <li className={codeStyle === 'babel' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'babel')}>Babel</a></li>
+                  <li className={codeStyle === 'es5' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'es5')}>ES5</a></li>
+                </ul>
+
+                <div className="code">
+                  <pre>
+                    {this.renderCodeCreate()}
+                  </pre>
+                </div>
+
+                <p>Then run <code className='inlineCode'>gulp build-bluekit</code> to generate information about your components:</p>
+
+                <div className="code">
+                  <pre>
+                    {this.renderCodeInsert()}
+                  </pre>
+                </div>
+
+                <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code className='inlineCode'>gulp watch-bluekit</code> task:</p>
+
+                <div className="code">
+                  <pre>
+                    {this.renderCodeWatch()}
+                  </pre>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="block block-hp-sample" id="setup">
-          <div className="block-content">
-
-            <h2 className="h3" id="setup-content">Analyze your components</h2>
-            <p>Add the following lines to your gulp file:</p>
-
-            <ul className="tabs">
-              <li className={codeStyle === 'babel' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'babel')}>Babel</a></li>
-              <li className={codeStyle === 'es5' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'es5')}>ES5</a></li>
-            </ul>
-
-            <div className="code">
-              <pre>
-                {this.renderCodeCreate()}
-              </pre>
-            </div>
-
-            <p>Then run <code className='inlineCode'>gulp build-bluekit</code> to generate information about your components:</p>
-
-            <div className="code">
-              <pre>
-                {this.renderCodeInsert()}
-              </pre>
-            </div>
-
-            <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code className='inlineCode'>gulp watch-bluekit</code> task:</p>
-
-            <div className="code">
-              <pre>
-                {this.renderCodeWatch()}
-              </pre>
-            </div>
-          </div>
-          </div>
+          </Element>
         </section>
 
-        <footer className="footer block" id="credits">
-          <div className="block-content">
-            <div className="footer-holder">
-              <p className="made"><span>Made with <img src="client/images/heart.svg" alt="love" /> by</span></p>
-              <p className="logo"><a href="http://www.blueberry.io/en" target="_blank"><img src="client/images/logo-blueberry.svg" alt="Blueberry" /></a></p>
-              <p className="more"><a href="https://github.com/blueberryapps">&hellip;learn more about our projects</a></p>
+        <Element name="credits">
+          <footer className="footer block">
+            <div className="block-content">
+              <div className="footer-holder">
+                <p className="made"><span>Made with <img src="client/images/heart.svg" alt="love" /> by</span></p>
+                <p className="logo"><a href="http://www.blueberry.io/en" target="_blank"><img src="client/images/logo-blueberry.svg" alt="Blueberry" /></a></p>
+                <p className="more"><a href="https://github.com/blueberryapps">&hellip;learn more about our projects</a></p>
+              </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        </Element>
 
       </StyleRoot>
     );
