@@ -25,7 +25,7 @@ class IndexComponent extends Component {
         <section>
 
           <div className="block block-hp-top">
-            <a className="github-fork left-top" title="Fork me on GitHub" href="https://github.com/blueberryapps/react-bluekit-web" target="_blank">
+            <a className="github-fork left-top" title="Fork me on GitHub" href="https://github.com/blueberryapps/react-bluekit" target="_blank">
               Fork me on github
             </a>
 
@@ -91,8 +91,8 @@ class IndexComponent extends Component {
           <div className="block-content">
             <div className="footer-holder">
               <p className="made"><span>Made with <img src="client/images/heart.svg" alt="love" /> by</span></p>
-              <p className="logo"><a href="http://www.blueberry.cz" target="_blank"><img src="client/images/logo-blueberry.svg" alt="Blueberry" /></a></p>
-              <p className="more"><a href="http://www.blueberry.cz">&hellip;learn more about our projects</a></p>
+              <p className="logo"><a href="http://www.blueberry.io/en" target="_blank"><img src="client/images/logo-blueberry.svg" alt="Blueberry" /></a></p>
+              <p className="more"><a href="https://github.com/blueberryapps">&hellip;learn more about our projects</a></p>
             </div>
           </div>
         </footer>
