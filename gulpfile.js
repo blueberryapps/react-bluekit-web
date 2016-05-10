@@ -7,5 +7,5 @@ createBlueKit({
   baseDir: path.join(__dirname, 'client'),
   gulp,
   // relative paths from base dir where to look for components
-  paths: [path.join('.', 'components', 'NotFound'), path.join('.', 'components', 'preview')]
+  paths: [path.join('.', 'components', 'preview')]
 })
