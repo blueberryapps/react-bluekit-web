@@ -5,6 +5,7 @@ import ComponentsPreviewButton from './components/preview/Button.react.js';
 import ComponentsPreviewCheckbox from './components/preview/Checkbox.react.js';
 import ComponentsPreviewErrorMessage from './components/preview/ErrorMessage.react.js';
 import ComponentsPreviewHeading from './components/preview/Heading.react.js';
+import ComponentsPreviewIcon from './components/preview/Icon.react.js';
 import ComponentsPreviewLoader from './components/preview/Loader.react.js';
 import ComponentsPreviewLogo from './components/preview/Logo.js';
 import ComponentsPreviewMultiField from './components/preview/MultiField.react.js';
@@ -80,6 +81,18 @@ export default {
     propsDefinition: {centered:{type:{name:"bool"},required:false,description:""},children:{type:{name:"any"},required:true,description:""},decorated:{type:{name:"bool"},required:false,description:"",defaultValue:{value:"true",computed:false}},decorationColor:{type:{name:"string"},required:false,description:""},inheritedStyle:{type:{name:"union",value:[{name:"object"},{name:"array"}]},required:false,description:""},kind:{type:{name:"enum",value:[{value:"'h1'",computed:false},{value:"'h2'",computed:false},{value:"'h3'",computed:false},{value:"'h4'",computed:false},{value:"'h5'",computed:false}]},required:true,description:""},noMargin:{type:{name:"bool"},required:false,description:""},thin:{type:{name:"bool"},required:false,description:""},withSubheading:{type:{name:"bool"},required:false,description:""}},
     simpleProps: {kind:"h1",decorated:true,children:"ANY children"},
     fullProps: {withSubheading:true,noMargin:true,decorationColor:"decorationColor",kind:"h1",centered:true,inheritedStyle:null,decorated:true,thin:true,children:"ANY children"}
+  },
+  ComponentsPreviewIcon: {
+    name: 'ComponentsPreviewIcon',
+    menu: 'Components Preview Icon',
+    file: './components/preview/Icon.react.js',
+    component: ComponentsPreviewIcon,
+    componentName: 'Icon',
+    description: '',
+    customProps: {},
+    propsDefinition: {color:{type:{name:"string"},required:false,description:"",defaultValue:{value:"'#000'",computed:false}},height:{type:{name:"number"},required:false,description:""},kind:{type:{name:"enum",value:[{value:"'arrow'",computed:false},{value:"'close'",computed:false},{value:"'code'",computed:false},{value:"'colorpicker'",computed:false},{value:"'copy'",computed:false},{value:"'eye'",computed:false},{value:"'eye-hidden'",computed:false},{value:"'overview'",computed:false},{value:"'search'",computed:false},{value:"'settings'",computed:false}]},required:true,description:""},onClick:{type:{name:"func"},required:false,description:""},preview:{type:{name:"bool"},required:false,description:""},size:{type:{name:"number"},required:false,description:"",defaultValue:{value:"32",computed:false}},style:{type:{name:"union",value:[{name:"arrayOf",value:{name:"object"}},{name:"object"}]},required:false,description:""},width:{type:{name:"number"},required:false,description:""},wrapperStyle:{type:{name:"union",value:[{name:"arrayOf",value:{name:"object"}},{name:"object"}]},required:false,description:""}},
+    simpleProps: {size:32,color:"#000",onClick:function () { dispatchEvent({detail: {prop: "onClick"}}) },kind:"arrow"},
+    fullProps: {size:32,color:"#000",width:1,height:1,preview:true,onClick:function () { dispatchEvent({detail: {prop: "onClick"}}) },style:null,kind:"arrow",wrapperStyle:null}
   },
   ComponentsPreviewLoader: {
     name: 'ComponentsPreviewLoader',
