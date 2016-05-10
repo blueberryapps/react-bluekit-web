@@ -18,6 +18,8 @@ class IndexComponent extends Component {
 
   render() {
     const {codeStyle} = this.state
+    const smallDevice = (window.innerWidth < 600) ? true : false
+
     return (
       <StyleRoot>
         <section>
@@ -41,10 +43,10 @@ class IndexComponent extends Component {
               <p><span className="label label-primary">npm install react-bluekit --save</span></p>
 
               <div id="sample" className="sample">
-                <BlueKit
-                  componentsIndex={componentsIndex}
-                  inline
-                />
+                {!smallDevice
+                  ? <BlueKit componentsIndex={componentsIndex} inline />
+                  : <img src="client/images/sample.jpg" alt="BlueKit sample" />
+                }
               </div>
             </div>
           </div>
