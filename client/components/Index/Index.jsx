@@ -1,3 +1,4 @@
+import AceEditor from './AceEditor';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import BlueKit from 'react-bluekit';
@@ -65,7 +66,7 @@ class IndexComponent extends Component {
               </pre>
             </div>
 
-            <p>Then run <code>gulp build-bluekit</code> to generate information about your components:</p>
+            <p>Then run <code className='inlineCode'>gulp build-bluekit</code> to generate information about your components:</p>
 
             <div className="code">
               <pre>
@@ -73,7 +74,7 @@ class IndexComponent extends Component {
               </pre>
             </div>
 
-            <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code>watch-bluekit</code> task:</p>
+            <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code className='inlineCode'>gulp watch-bluekit</code> task:</p>
 
             <div className="code">
               <pre>
@@ -100,51 +101,26 @@ class IndexComponent extends Component {
 
   renderCodeInsert() {
     const {codeStyle} = this.state
-    return codeStyle === 'babel'
-      ? <code dangerouslySetInnerHTML={{__html:`import Bluekit from 'react-bluekit';
-import componentsIndex from './componentsIndex';
+    const babelSource = `import Bluekit from 'react-bluekit';\nimport componentsIndex from './componentsIndex';\n\n<BlueKit\n componentsIndex={componentsIndex}\n inline // display inline (not full page)\n/>`
+    const esSource = `var Bluekit = require('react-bluekit').default;\nvar componentsIndex = require('./componentsIndex').default;\n\n<BlueKit\n componentsIndex={componentsIndex}\n inline // display inline (not full page)\n/>`
 
-&lt;BlueKit
-  componentsIndex={componentsIndex}
-  inline // display inline (not full page)
-/&gt;`}} />
-      : <code dangerouslySetInnerHTML={{__html:`var Bluekit = require('react-bluekit').default;
-var componentsIndex = require('./componentsIndex').default;
-
-&lt;BlueKit
-  componentsIndex={componentsIndex}
-  inline // display inline (not full page)
-/&gt;`}} />
-
+    return <AceEditor name='sourceCodeInsert' source={codeStyle === 'babel' ? babelSource : esSource} />
   }
 
   renderCodeCreate() {
     const {codeStyle} = this.state
-    return codeStyle === 'babel'
-      ? <code dangerouslySetInnerHTML={{__html:`import createBlueKit from 'react-bluekit/lib/createBlueKit';
+    const babelSource = `import createBlueKit from 'react-bluekit/lib/createBlueKit';\n\ncreateBlueKit({\n // your directory where components are located\n baseDir: \`\${__dirname}/src/browser\`\,\n // relative paths from base dir where to look for components\n paths: ['./components', './auth']\n});`
 
-createBlueKit(&lcub;
-  // your directory where components are located
-  baseDir: &grave;&dollar;{__dirname}/src/browser&grave;,
-  // relative paths from base dir where to look for components
-  paths: ['./components', './auth']
-&rcub;);`}} />
-      : <code dangerouslySetInnerHTML={{__html:`var createBlueKit = require('react-bluekit/lib/createBlueKit').default;
+    const esSource = `var createBlueKit = require('react-bluekit/lib/createBlueKit').default;\n\ncreateBlueKit({\n // your directory where components are located\n baseDir: __dirname + '/src/browser'\,\n // relative paths from base dir where to look for components\n paths: ['./components', './auth']\n});`
 
-createBlueKit(&lcub;
-  // your directory where components are located
-  baseDir: __dirname + '/src/browser',
-  // relative paths from base dir where to look for components
-  paths: ['./components', './auth']
-&rcub;);`}} />
+    return <AceEditor name='sourceCodeCreate' source={codeStyle === 'babel' ? babelSource : esSource} />
   }
 
   renderCodeWatch() {
     const {codeStyle} = this.state
-    return codeStyle === 'babel'
-      ? <code dangerouslySetInnerHTML={{__html:`gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`}} />
-      : <code dangerouslySetInnerHTML={{__html:`gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`}} />
+    const code = `gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`
 
+    return <AceEditor name='sourceCodeWatch' source={code} />
   }
 }
 
