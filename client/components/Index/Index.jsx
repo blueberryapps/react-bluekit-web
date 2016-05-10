@@ -35,7 +35,7 @@ class IndexComponent extends Component {
             </div>
 
             <div className="block-content">
-              <h1 className="logo"><img src="client/images/logo.svg" alt="Bluekit" /></h1>
+              <h1 className="logo"><img src="client/images/logo.svg" alt="BlueKit" /></h1>
               <p>Render React components with editable source and live preview</p>
               <p><span className="label label-primary">npm install react-bluekit --save</span></p>
 
@@ -52,7 +52,7 @@ class IndexComponent extends Component {
           <div className="block-content">
 
             <h2 className="h3" id="setup-content">Analyze your components</h2>
-            <p>Add into your gulp file</p>
+            <p>Add the following lines to your gulp file:</p>
 
             <ul className="tabs">
               <li className={codeStyle === 'babel' && 'active'}><a href='/' onClick={(e) => this.changeStyle(e, 'babel')}>Babel</a></li>
@@ -65,13 +65,21 @@ class IndexComponent extends Component {
               </pre>
             </div>
 
-            <p>Then run <code>gulp build-bluekit</code> to generate informations about your components</p>
+            <p>Then run <code>gulp build-bluekit</code> to generate information about your components:</p>
 
-          <div className="code">
-            <pre>
-              {this.renderCodeInsert()}
-            </pre>
-          </div>
+            <div className="code">
+              <pre>
+                {this.renderCodeInsert()}
+              </pre>
+            </div>
+
+            <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code>watch-bluekit</code> task:</p>
+
+            <div className="code">
+              <pre>
+                {this.renderCodeWatch()}
+              </pre>
+            </div>
           </div>
           </div>
         </section>
@@ -81,7 +89,7 @@ class IndexComponent extends Component {
             <div className="footer-holder">
               <p className="made"><span>Made with <img src="client/images/heart.svg" alt="love" /> by</span></p>
               <p className="logo"><a href="http://www.blueberry.cz" target="_blank"><img src="client/images/logo-blueberry.svg" alt="Blueberry" /></a></p>
-              <p className="more"><a href="#">&hellip;learn more about our projects</a></p>
+              <p className="more"><a href="http://www.blueberry.cz">&hellip;learn more about our projects</a></p>
             </div>
           </div>
         </footer>
@@ -125,10 +133,18 @@ createBlueKit(&lcub;
 
 createBlueKit(&lcub;
   // your directory where components are located
-  baseDir: &grave;&dollar;{__dirname}/src/browser&grave;,
+  baseDir: __dirname + '/src/browser',
   // relative paths from base dir where to look for components
   paths: ['./components', './auth']
 &rcub;);`}} />
+  }
+
+  renderCodeWatch() {
+    const {codeStyle} = this.state
+    return codeStyle === 'babel'
+      ? <code dangerouslySetInnerHTML={{__html:`gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`}} />
+      : <code dangerouslySetInnerHTML={{__html:`gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`}} />
+
   }
 }
 
