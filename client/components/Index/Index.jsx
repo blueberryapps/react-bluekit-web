@@ -1,5 +1,4 @@
-import AceEditor from 'react-ace';
-import CopyCode from './CopyCode';
+import AceEditor from './AceEditor';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import BlueKit from 'react-bluekit';
@@ -9,7 +8,6 @@ import {StyleRoot} from 'radium';
 
 class IndexComponent extends Component {
   state = {
-    copied: false,
     codeStyle: 'babel'
   }
 
@@ -68,7 +66,7 @@ class IndexComponent extends Component {
               </pre>
             </div>
 
-            <p>Then run <code>gulp build-bluekit</code> to generate information about your components:</p>
+            <p>Then run <code className='inlineCode'>gulp build-bluekit</code> to generate information about your components:</p>
 
             <div className="code">
               <pre>
@@ -76,7 +74,7 @@ class IndexComponent extends Component {
               </pre>
             </div>
 
-            <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code>watch-bluekit</code> task:</p>
+            <p>You can also setup BlueKit to be built on application start and then to watch for component changes using the <code className='inlineCode'>gulp watch-bluekit</code> task:</p>
 
             <div className="code">
               <pre>
@@ -106,50 +104,7 @@ class IndexComponent extends Component {
     const babelSource = `import Bluekit from 'react-bluekit';\nimport componentsIndex from './componentsIndex';\n\n<BlueKit\n componentsIndex={componentsIndex}\n inline // display inline (not full page)\n/>`
     const esSource = `var Bluekit = require('react-bluekit').default;\nvar componentsIndex = require('./componentsIndex').default;\n\n<BlueKit\n componentsIndex={componentsIndex}\n inline // display inline (not full page)\n/>`
 
-    return codeStyle === 'babel'
-      ? <div>
-          <AceEditor
-            editorProps={{$blockScrolling: true}}
-            fontSize={13}
-            highlightActiveLine={false}
-            maxLines={`${babelSource}`.split(/\n/).length}
-            mode="jsx"
-            name="babelSourceInsert"
-            readOnly
-            setOptions={{
-              enableBasicAutocompletion: false,
-              enableLiveAutocompletion: false,
-            }}
-            showGutter={false}
-            showPrintMargin={false}
-            theme="chrome"
-            value={babelSource}
-            width="100%"
-          />
-          {this.renderCopyCode(babelSource)}
-        </div>
-      : <div>
-          <AceEditor
-            editorProps={{$blockScrolling: true}}
-            fontSize={13}
-            highlightActiveLine={false}
-            maxLines={`${esSource}`.split(/\n/).length}
-            mode="jsx"
-            name="esSourceInsert"
-            readOnly
-            setOptions={{
-              enableBasicAutocompletion: false,
-              enableLiveAutocompletion: false,
-            }}
-            showGutter={false}
-            showPrintMargin={false}
-            theme="chrome"
-            value={esSource}
-            width="100%"
-          />
-          {this.renderCopyCode(esSource)}
-        </div>
-
+    return <AceEditor name='sourceCodeInsert' source={codeStyle === 'babel' ? babelSource : esSource} />
   }
 
   renderCodeCreate() {
@@ -158,74 +113,15 @@ class IndexComponent extends Component {
 
     const esSource = `var createBlueKit = require('react-bluekit/lib/createBlueKit').default;\n\ncreateBlueKit({\n // your directory where components are located\n baseDir: __dirname + '/src/browser'\,\n // relative paths from base dir where to look for components\n paths: ['./components', './auth']\n});`
 
-    return codeStyle === 'babel'
-      ? <div>
-          <AceEditor
-            editorProps={{$blockScrolling: true}}
-            fontSize={13}
-            highlightActiveLine={false}
-            maxLines={`${babelSource}`.split(/\n/).length}
-            mode="jsx"
-            name="babelSourceCreate"
-            readOnly
-            setOptions={{
-              enableBasicAutocompletion: false,
-              enableLiveAutocompletion: false,
-            }}
-            showGutter={false}
-            showPrintMargin={false}
-            theme="chrome"
-            value={babelSource}
-            width="100%"
-          />
-          {this.renderCopyCode(babelSource)}
-        </div>
-      : <div>
-          <AceEditor
-            editorProps={{$blockScrolling: true}}
-            fontSize={13}
-            highlightActiveLine={false}
-            maxLines={`${esSource}`.split(/\n/).length}
-            mode="jsx"
-            name="esSourceCreate"
-            readOnly
-            setOptions={{
-              enableBasicAutocompletion: false,
-              enableLiveAutocompletion: false,
-            }}
-            showGutter={false}
-            showPrintMargin={false}
-            theme="chrome"
-            value={esSource}
-            width="100%"
-          />
-          <code dangerouslySetInnerHTML={{__html: esSource}} />
-          {this.renderCopyCode(esSource)}
-        </div>
+    return <AceEditor name='sourceCodeCreate' source={codeStyle === 'babel' ? babelSource : esSource} />
   }
 
   renderCodeWatch() {
     const {codeStyle} = this.state
     const code = `gulp.task('default', ['build-bluekit', 'server', 'watch-bluekit']);`
 
-    return (
-      <div>
-        <code dangerouslySetInnerHTML={{__html: babelSource}} />
-        {this.renderCopyCode(babelSource)}
-      </div>
-    )
+    return <AceEditor name='sourceCodeWatch' source={code} />
   }
-
-  renderCopyCode(source) {
-
-    return <CopyCode source={source} />
-  }
-
-  onCopy() {
-    this.setState({copied: true})
-    setTimeout(() => this.setState({copied: false}), 3000)
-  }
-
 }
 
 IndexComponent.defaultProps = {
