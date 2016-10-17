@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import React, {Component, PropTypes as RPT} from 'react';
+import React, { Component, PropTypes as RPT } from 'react';
 
 export default class CopyCode extends Component {
 
@@ -12,26 +12,26 @@ export default class CopyCode extends Component {
     copied: false
   }
 
+  onCopy() {
+    this.setState({ copied: true });
+    setTimeout(() => this.setState({ copied: false }), 3000);
+  }
+
   render() {
-    const {copied} = this.state
-    const {source} = this.props
+    const { copied } = this.state;
+    const { source } = this.props;
 
     return (
       <div className="copy-wrapper">
         <CopyToClipboard onCopy={this.onCopy.bind(this)} text={source}>
-          <div className={classNames('copy-icon', {'copied': copied})}>
+          <div className={classNames('copy-icon', { 'copied': copied })}>
             <div className="tooltip">
               Copied
             </div>
           </div>
         </CopyToClipboard>
       </div>
-    )
-  }
-
-  onCopy() {
-    this.setState({copied: true})
-    setTimeout(() => this.setState({copied: false}), 3000)
+    );
   }
 
 }

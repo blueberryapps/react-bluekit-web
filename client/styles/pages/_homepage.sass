@@ -28,10 +28,38 @@
     position: relative
     +render-to(xs)
       margin-top: rem(98)
-
-    & > img
-      width: 100%
+    a
       display: block
+      position: relative
+      overflow: hidden
+      &:hover
+        .overlay
+          top: 0
+          opacity: 1
+    img
+      +img-responsive
+    .overlay
+      position: absolute
+      top: 100%
+      right: 0
+      bottom: 0
+      left: 0
+      opacity: 0
+      background-color: rgba(0, 0, 0, .6)
+      transition: all .2s ease-in-out
+      &-text
+        color: $well-bg
+        font-size: rem(50)
+        font-weight: bold
+        position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-50%,-50%)
+        text-transform: uppercase
+        +render-to(800px)
+          font-size: rem(24)
+        +render-to(xs)
+          font-size: rem(16)
 
     &:before
       content: ""
